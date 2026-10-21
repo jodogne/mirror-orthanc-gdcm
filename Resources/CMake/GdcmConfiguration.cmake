@@ -50,8 +50,13 @@ if (STATIC_BUILD OR NOT USE_SYSTEM_GDCM)
   elseif (MSVC)
     # In the case of "USE_LEGACY_GDCM", there is a mismatch between
     # the CRT that is used by the GDCM project ("/MT") and by the
-    # Orthanc plugin ("/MD"). We clarify by forcing to "/MD".
-    set(AdditionalCFlags "/MD")
+    # Orthanc plugin ("/MD"). We clarify by forcing to "/MT".
+    #
+    # 2026-10-21: We switched from "/MD" to "/MT", as a consequence of
+    # the following changeset in the Orthanc Framework that will be
+    # part of Orthanc 1.13.1:
+    # https://orthanc.uclouvain.be/hg/orthanc/rev/0dd4240ea372
+    set(AdditionalCFlags "/MT")
     set(AdditionalCxxFlags ${AdditionalCFlags})
   endif()
   
